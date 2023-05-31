@@ -1,7 +1,6 @@
 import java.util.*;
 
 public class DijkstraSearch<Vertex> extends Search<Vertex> {
-
     private Map<Vertex, Integer> distance;
     private Map<Vertex, Vertex> parentMap;
 
@@ -13,18 +12,18 @@ public class DijkstraSearch<Vertex> extends Search<Vertex> {
         calculateShortestDistances(source);
 
         if (!distance.containsKey(destination)) {
-            return null;
+            return null;  // If there is no path between source and destination, return null
         }
 
         List<Vertex> path = new ArrayList<>();
         Vertex current = destination;
         while (!current.equals(source)) {
-            path.add(0, current);
-            current = parentMap.get(current);
+            path.add(0, current);  // Adds the current vertex to the beginning of the path list
+            current = parentMap.get(current);  // Moves to the parent vertex
         }
-        path.add(0, source);
+        path.add(0, source);  // Adds the source vertex at the beginning of the path list
 
-        return path;
+        return path;  // Returns the shortest path from source to destination
     }
 
     private void calculateShortestDistances(Vertex source) {
@@ -32,11 +31,11 @@ public class DijkstraSearch<Vertex> extends Search<Vertex> {
         parentMap = new HashMap<>();
 
         for (Vertex vertex : getGraph().getVertices()) {
-            distance.put(vertex, Integer.MAX_VALUE);
+            distance.put(vertex, Integer.MAX_VALUE);  // Initialize all distances to infinity
         }
 
-        distance.put(source, 0);
-        parentMap.put(source, null);
+        distance.put(source, 0);  // Distance from source to itself is 0
+        parentMap.put(source, null);  // Source has no parent
 
         PriorityQueue<Vertex> queue = new PriorityQueue<>(Comparator.comparingInt(distance::get));
         queue.offer(source);
@@ -51,12 +50,11 @@ public class DijkstraSearch<Vertex> extends Search<Vertex> {
                 int newDistance = distance.get(current) + weight;
 
                 if (newDistance < distance.get(neighbor)) {
-                    distance.put(neighbor, newDistance);
-                    parentMap.put(neighbor, current);
-                    queue.offer(neighbor);
+                    distance.put(neighbor, newDistance);  // Update the distance to the neighboring vertex
+                    parentMap.put(neighbor, current);  // Set the current vertex as the parent of the neighboring vertex
+                    queue.offer(neighbor);  // Add the neighboring vertex to the priority queue
                 }
             }
         }
     }
-
 }

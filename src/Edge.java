@@ -1,8 +1,7 @@
 public class Edge<Vertex> {
-
-    private Vertex source;
-    private Vertex dest;
-    private double weight;
+    private Vertex source;  // Represents the source vertex of the edge
+    private Vertex dest;    // Represents the destination vertex of the edge
+    private double weight;  // Represents the weight of the edge
 
     public Edge(Vertex source, Vertex dest, int weight) {
         this.source = source;
@@ -11,14 +10,14 @@ public class Edge<Vertex> {
     }
 
     public Vertex getSource() {
-        return source;
+        return source;  // Returns the source vertex of the edge
     }
 
     public Vertex getDestination() {
-        return dest;
+        return dest;    // Returns the destination vertex of the edge
     }
 
     public double getWeight() {
-        return weight;
+        return weight;  // Returns the weight of the edge
     }
 }

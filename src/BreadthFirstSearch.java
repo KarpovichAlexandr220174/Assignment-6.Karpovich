@@ -1,30 +1,29 @@
 import java.util.*;
 
 public class BreadthFirstSearch<Vertex> extends Search<Vertex> {
-
     private Map<Vertex, Vertex> parentMap;
 
     public BreadthFirstSearch(WeightedGraph<Vertex> graph) {
         super(graph);
-        parentMap = new HashMap<>();
+        parentMap = new HashMap<>();  // Initializes the parent map for tracking the path
     }
 
     public List<Vertex> findShortestPath(Vertex source, Vertex destination) {
-        parentMap = new HashMap<>();
+        parentMap = new HashMap<>();  // Clears the parent map for each path finding
 
         if (!pathExist(source, destination)) {
-            return null;
+            return null;  // If there is no path between source and destination, return null
         }
 
         List<Vertex> path = new ArrayList<>();
         Vertex current = destination;
         while (!current.equals(source)) {
-            path.add(0, current);
-            current = parentMap.get(current);
+            path.add(0, current);  // Adds the current vertex to the beginning of the path list
+            current = parentMap.get(current);  // Moves to the parent vertex
         }
-        path.add(0, source);
+        path.add(0, source);  // Adds the source vertex at the beginning of the path list
 
-        return path;
+        return path;  // Returns the shortest path from source to destination
     }
 
     @Override
@@ -39,7 +38,7 @@ public class BreadthFirstSearch<Vertex> extends Search<Vertex> {
             Vertex current = queue.poll();
 
             if (current.equals(destination)) {
-                return true;
+                return true;  // Returns true if the destination vertex is reached
             }
 
             List<Edge<Vertex>> adjacentEdges = getGraph().getAdjacentEdges(current);
@@ -47,12 +46,12 @@ public class BreadthFirstSearch<Vertex> extends Search<Vertex> {
                 Vertex neighbor = edge.getDestination();
                 if (!visited.contains(neighbor)) {
                     visited.add(neighbor);
-                    parentMap.put(neighbor, current);
-                    queue.offer(neighbor);
-
+                    parentMap.put(neighbor, current);  // Sets the current vertex as the parent of the neighboring vertex
+                    queue.offer(neighbor);  // Adds the unvisited neighboring vertex to the queue
                 }
             }
         }
-        return false;
+
+        return false;  // Returns false if the destination vertex is not reachable
     }
 }
