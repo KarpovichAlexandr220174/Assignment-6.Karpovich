@@ -7,6 +7,9 @@ public class Search<Vertex> {
         this.graph = graph;
     }
 
+    public WeightedGraph<Vertex> getGraph(){
+        return graph;
+    }
     public boolean pathExist(Vertex source, Vertex destination) {
         Set<Vertex> visited = new HashSet<>();
         Queue<Vertex> queue = new LinkedList<>();
